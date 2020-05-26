@@ -2,3 +2,13 @@
 
 @import "../node_modules/normalize.css/normalize.css";
 
+a {
+  color: inherit;
+  text-decoration: inherit;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+
