@@ -2,18 +2,24 @@
   <h1>Liste des articles</h1>
   <div class="buttons">
     <button routerLink="/stock/create">Créer</button>
-    <button *ngIf="selectedArticles.length > 0" (click)="delete()">Supprimer</button>
+    <button *ngIf="selectedArticles.length > 0" (click)="delete()">
+      Supprimer
+    </button>
   </div>
 
   <div class="table">
     <div class="header">
-      <div class="cell">Nom</div>
+      <div class="cell name">Nom</div>
       <div class="cell">Prix (€)</div>
       <div class="cell">Quantité</div>
     </div>
     <div class="body">
-      <div *ngFor="let article of articleService.articles" class="row" (click)="select($event, article)">
-        <div class="cell">{{ article.name }}</div>
+      <div
+        *ngFor="let article of articleService.articles"
+        class="row"
+        (click)="select($event, article)"
+      >
+        <div class="cell name">{{ article.name }}</div>
         <div class="cell">{{ article.price }}</div>
         <div class="cell">{{ article.qty }}</div>
       </div>
