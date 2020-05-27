@@ -7,37 +7,11 @@
       <div class="cell">Quantité</div>
     </div>
     <div class="body">
-      <div class="row">
-        <div class="cell">Tournevis</div>
-        <div class="cell">12.34</div>
-        <div class="cell">5</div>
+      <div *ngFor="let article of articles" class="row">
+        <div class="cell">{{ article.name }}</div>
+        <div class="cell">{{ article.price }}</div>
+        <div class="cell">{{ article.qty }}</div>
       </div>
-      <div class="row">
-        <div class="cell">Marteau</div>
-        <div class="cell">3.60</div>
-        <div class="cell">10</div>
-      </div>
-      <div class="row">
-        <div class="cell">Tournevis</div>
-        <div class="cell">12.34</div>
-        <div class="cell">5</div>
-      </div>
-      <div class="row">
-        <div class="cell">Marteau</div>
-        <div class="cell">3.60</div>
-        <div class="cell">10</div>
-      </div>
-      <div class="row">
-        <div class="cell">Tournevis</div>
-        <div class="cell">12.34</div>
-        <div class="cell">5</div>
-      </div>
-      <div class="row">
-        <div class="cell">Marteau</div>
-        <div class="cell">3.60</div>
-        <div class="cell">10</div>
-      </div>
-
     </div>
   </div>
 </main>
