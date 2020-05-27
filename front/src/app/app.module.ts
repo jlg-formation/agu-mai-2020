@@ -11,6 +11,7 @@ import { HomeComponent } from './routes/home/home.component';
 import { LegalComponent } from './routes/legal/legal.component';
 import { StockComponent } from './routes/stock/stock.component';
 import { CreateComponent } from './routes/create/create.component';
+import { WidgetModule } from './widget/widget.module';
 
 // the second parameter 'fr' is optional
 registerLocaleData(localeFr, 'fr');
@@ -23,7 +24,7 @@ registerLocaleData(localeFr, 'fr');
     StockComponent,
     CreateComponent,
   ],
-  imports: [BrowserModule, ReactiveFormsModule, AppRoutingModule, LayoutModule],
+  imports: [BrowserModule, ReactiveFormsModule, AppRoutingModule, LayoutModule, WidgetModule],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
   bootstrap: [AppComponent],
 })
