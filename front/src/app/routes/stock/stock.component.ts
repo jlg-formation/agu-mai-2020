@@ -8,7 +8,6 @@ import { Article } from 'src/app/interfaces/article';
   styleUrls: ['./stock.component.scss'],
 })
 export class StockComponent implements OnInit {
-
   selectedArticles: Article[] = [];
 
   constructor(public articleService: ArticleService) {}
@@ -23,13 +22,18 @@ export class StockComponent implements OnInit {
     console.log('row: ', row);
     if (row.classList.contains('selected')) {
       row.classList.remove('selected');
-      const index = this.selectedArticles.findIndex(a => a === article);
+      const index = this.selectedArticles.findIndex((a) => a === article);
       this.selectedArticles.splice(index, 1);
     } else {
       row.classList.add('selected');
       this.selectedArticles.push(article);
     }
     console.log('this.selectedArticles: ', this.selectedArticles);
+  }
 
+  delete() {
+    console.log('delete');
+    this.articleService.delete(this.selectedArticles);
+    this.selectedArticles.length = 0;
   }
 }

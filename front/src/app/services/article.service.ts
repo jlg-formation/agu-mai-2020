@@ -27,4 +27,12 @@ export class ArticleService {
     const articles = JSON.parse(str);
     return articles;
   }
+
+  delete(selectedArticles: Article[]) {
+    for (const art of selectedArticles) {
+      const index = this.articles.findIndex((a) => a === art);
+      this.articles.splice(index, 1);
+    }
+    this.save();
+  }
 }
