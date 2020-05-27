@@ -1,0 +1,32 @@
+:host {
+  display: flex;
+  justify-content: center;
+}
+
+main {
+  max-width: 40em;
+  padding: 0.5em;
+}
+
+h1 {
+  text-align: center;
+}
+
+.header {
+  display: flex;
+  font-weight: bold;
+  background: #ccc;
+}
+
+.row {
+  display: flex;
+  &:nth-child(even) {
+    background: #eee;
+  }
+}
+
+.cell {
+  padding: 0.5em;
+  flex-grow: 1;
+  width: 5em;
+}
