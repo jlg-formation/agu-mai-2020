@@ -24,3 +24,10 @@
 .table {
   margin-top: 1em;
 }
+
+.buttons {
+  display: flex;
+  button {
+    margin-right: 0.5em;
+  }
+}
