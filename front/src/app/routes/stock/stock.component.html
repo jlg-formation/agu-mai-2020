@@ -8,7 +8,7 @@
       <div class="cell">Quantité</div>
     </div>
     <div class="body">
-      <div *ngFor="let article of articleService.articles" class="row">
+      <div *ngFor="let article of articleService.articles" class="row" (click)="select()">
         <div class="cell">{{ article.name }}</div>
         <div class="cell">{{ article.price }}</div>
         <div class="cell">{{ article.qty }}</div>

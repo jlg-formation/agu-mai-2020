@@ -11,4 +11,8 @@ export class StockComponent implements OnInit {
   constructor(public articleService: ArticleService) {}
 
   ngOnInit(): void {}
+
+  select() {
+    console.log('select');
+  }
 }
