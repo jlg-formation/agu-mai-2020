@@ -5,18 +5,26 @@ import { Article } from '../interfaces/article';
   providedIn: 'root',
 })
 export class ArticleService {
-  articles: Article[] = [
-    { name: 'Tournevis', price: 12.34, qty: 4 },
-    { name: 'Marteau', price: 12.34, qty: 14 },
-    { name: 'Clous', price: 12.34, qty: 24 },
-    { name: 'Pince', price: 12.34, qty: 41 },
-    { name: 'Scie', price: 12.34, qty: 23 },
-  ];
+  articles = this.getArticles();
 
   constructor() {}
 
   create(article: Article) {
     console.log('article: ', article);
     this.articles.push(article);
+    this.save();
+  }
+
+  save() {
+    localStorage.setItem('articles', JSON.stringify(this.articles));
+  }
+
+  getArticles(): Article[] {
+    const str = localStorage.getItem('articles');
+    if (!str) {
+      return [];
+    }
+    const articles = JSON.parse(str);
+    return articles;
   }
 }
