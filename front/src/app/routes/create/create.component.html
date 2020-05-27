@@ -3,15 +3,15 @@
   <form [formGroup]="f">
     <label>
       <div>Nom</div>
-      <input type="text" />
+      <input type="text" formControlName="name" />
     </label>
     <label>
       <div>Prix</div>
-      <input type="text" />
+      <input type="number" formControlName="price" />
     </label>
     <label>
       <div>Quantité</div>
-      <input type="text" />
+      <input type="number" formControlName="qty" />
     </label>
     <button type="submit">Créer</button>
   </form>
