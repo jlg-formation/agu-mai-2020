@@ -1,0 +1,16 @@
+form {
+  display: flex;
+  flex-flow: column;
+
+  label {
+    padding-bottom: 1em;
+  }
+
+  input {
+    width: 100%;
+  }
+}
+
+button {
+  margin-top: 1em;
+}
