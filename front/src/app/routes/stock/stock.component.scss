@@ -9,6 +9,10 @@
   &:nth-child(even) {
     background: #eee;
   }
+
+  &.selected {
+    background: hsl(240, 100%, 80%);
+  }
 }
 
 .cell {
