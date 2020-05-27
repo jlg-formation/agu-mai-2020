@@ -16,4 +16,8 @@ export class CreateComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  submit() {
+    console.log('submit');
+  }
 }
