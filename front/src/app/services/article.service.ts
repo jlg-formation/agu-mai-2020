@@ -28,7 +28,7 @@ export class ArticleService {
     return articles;
   }
 
-  delete(selectedArticles: Article[]) {
+  async delete(selectedArticles: Article[]) {
     for (const art of selectedArticles) {
       const index = this.articles.findIndex((a) => a === art);
       this.articles.splice(index, 1);

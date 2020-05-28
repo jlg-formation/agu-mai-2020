@@ -8,6 +8,21 @@ export const ws = app;
 
 app.use(express.json());
 
+const sleep = (delay: number) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, delay);
+  });
+};
+
+app.use((req, res, next) => {
+  (async () => {
+    await sleep(300);
+    next();
+  })();
+});
+
 app.get("/now", (req, res) => {
   res.json({
     date: new Date(),

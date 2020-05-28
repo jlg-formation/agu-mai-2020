@@ -14,19 +14,14 @@ export class HttpArticleService extends ArticleService {
     this.refresh();
   }
 
-  refresh() {
-    this.http.get<Article[]>('/ws/articles').subscribe({
-      next: (articles) => {
-        this.articles = articles;
-        this.save();
-      },
-      error: (err) => {
-        console.error('err: ', err);
-      },
-      complete: () => {
-        console.log('complete');
-      },
-    });
+  async refresh() {
+    try {
+      const articles = await this.http.get<Article[]>('/ws/articles').toPromise();
+      this.articles = articles;
+      this.save();
+    } catch (err) {
+      console.error('err: ', err);
+    }
   }
 
   save() {
@@ -34,7 +29,7 @@ export class HttpArticleService extends ArticleService {
     console.log('coucou je suis http');
   }
 
-  delete(selectedArticles: Article[]) {
+  async delete(selectedArticles: Article[]) {
     const ids = selectedArticles.map((a) => a.id);
     const options = {
       headers: new HttpHeaders({
@@ -42,13 +37,12 @@ export class HttpArticleService extends ArticleService {
       }),
       body: ids,
     };
-    (async () => {
-      try {
-        await this.http.delete('/ws/articles-bulk', options).toPromise();
-        this.refresh();
-      } catch (err) {
-        console.log('err: ', err);
-      }
-    })();
+
+    try {
+      await this.http.delete('/ws/articles-bulk', options).toPromise();
+      await this.refresh();
+    } catch (err) {
+      console.log('err: ', err);
+    }
   }
 }
