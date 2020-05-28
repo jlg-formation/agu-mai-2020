@@ -1,6 +1,8 @@
 import express from "express";
 import serveIndex from "serve-index";
 
+import { ws } from "./ws";
+
 const app = express();
 const port = 3000;
 
@@ -10,11 +12,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/ws/now", (req, res) => {
-  res.json({
-    date: new Date(),
-  });
-});
+app.use("/ws", ws);
 
 app.use(express.static("public"));
 app.use(serveIndex("public"));
