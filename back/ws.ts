@@ -36,6 +36,8 @@ const articles = [
   { id: "a4", name: "Pince coupante", price: 10.99, qty: 3 },
 ];
 
+let lastId = 4;
+
 app.get("/articles", (req, res) => {
   res.json(articles);
 });
@@ -61,4 +63,13 @@ app.delete("/articles-bulk", (req, res) => {
     articles.splice(index, 1);
   }
   res.status(204).end();
+});
+
+app.post("/articles", (req, res) => {
+  const article = req.body;
+  lastId++;
+  const id = "a" + lastId;
+  req.body.id = id;
+  articles.push(req.body);
+  res.status(201).json(req.body);
 });

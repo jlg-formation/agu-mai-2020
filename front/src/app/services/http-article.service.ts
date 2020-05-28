@@ -16,7 +16,9 @@ export class HttpArticleService extends ArticleService {
 
   async refresh() {
     try {
-      const articles = await this.http.get<Article[]>('/ws/articles').toPromise();
+      const articles = await this.http
+        .get<Article[]>('/ws/articles')
+        .toPromise();
       this.articles = articles;
       this.save();
     } catch (err) {
@@ -41,6 +43,15 @@ export class HttpArticleService extends ArticleService {
     try {
       await this.http.delete('/ws/articles-bulk', options).toPromise();
       await this.refresh();
+    } catch (err) {
+      console.log('err: ', err);
+    }
+  }
+
+  async create(article: Article) {
+    try {
+      super.create(article);
+      await this.http.post('/ws/articles', article).toPromise();
     } catch (err) {
       console.log('err: ', err);
     }
