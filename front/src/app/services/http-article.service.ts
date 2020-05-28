@@ -16,7 +16,7 @@ export class HttpArticleService extends ArticleService {
   }
 
   refresh() {
-    this.http.get('http://localhost:3000/ws/articles').subscribe();
+    this.http.get('/ws/articles').subscribe();
   }
 
   save() {

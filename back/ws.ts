@@ -1,7 +1,10 @@
 import express from "express";
+// import cors from "cors";
 
 const app = express.Router();
 export const ws = app;
+
+// app.use(cors());
 
 app.get("/now", (req, res) => {
   res.json({
