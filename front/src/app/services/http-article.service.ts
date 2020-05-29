@@ -15,10 +15,7 @@ export class HttpArticleService extends ArticleService {
   }
 
   refresh() {
-    this.http.get<Article[]>('/ws/articles').subscribe({
-      next: (articles) => this.articles$.next(articles),
-      error: (err) => console.error('err', err),
-    });
+    return this.http.get<Article[]>('/ws/articles');
   }
 
   delete(selectedArticles: Article[]) {
@@ -33,7 +30,10 @@ export class HttpArticleService extends ArticleService {
 
     this.http.delete<void>('/ws/articles-bulk', options).subscribe({
       next: () => {
-        this.refresh();
+        this.refresh().subscribe({
+          next: (articles) => this.articles$.next(articles),
+          error: (err) => console.error('err', err),
+        });
       },
       error: (err) => console.error('err', err),
     });
