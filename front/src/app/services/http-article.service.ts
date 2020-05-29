@@ -46,7 +46,10 @@ export class HttpArticleService extends ArticleService {
     super.create(article);
     this.http.post('/ws/articles', article).subscribe({
       next: () => {
-        this.refresh();
+        this.refresh().subscribe({
+          next: (articles) => this.articles$.next(articles),
+          error: (err) => console.error('err', err),
+        });
       },
       error: (err) => console.error('err', err),
     });
