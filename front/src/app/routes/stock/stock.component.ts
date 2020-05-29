@@ -31,9 +31,9 @@ export class StockComponent implements OnInit {
     console.log('this.selectedArticles: ', this.selectedArticles);
   }
 
-  async delete() {
+  delete() {
     console.log('delete');
-    await this.articleService.delete(this.selectedArticles);
+    this.articleService.delete(this.selectedArticles);
     this.selectedArticles.length = 0;
   }
 }

@@ -18,7 +18,7 @@ const sleep = (delay: number) => {
 
 app.use((req, res, next) => {
   (async () => {
-    await sleep(300);
+    await sleep(2000);
     next();
   })();
 });

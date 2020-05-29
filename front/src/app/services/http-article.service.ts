@@ -14,24 +14,15 @@ export class HttpArticleService extends ArticleService {
     this.refresh();
   }
 
-  async refresh() {
-    try {
-      const articles = await this.http
-        .get<Article[]>('/ws/articles')
-        .toPromise();
-      this.articles = articles;
-      this.save();
-    } catch (err) {
-      console.error('err: ', err);
-    }
+  refresh() {
+    this.http.get<Article[]>('/ws/articles').subscribe({
+      next: (articles) => this.articles$.next(articles),
+      error: (err) => console.error('err', err),
+    });
   }
 
-  save() {
-    super.save();
-    console.log('coucou je suis http');
-  }
-
-  async delete(selectedArticles: Article[]) {
+  delete(selectedArticles: Article[]) {
+    super.delete(selectedArticles);
     const ids = selectedArticles.map((a) => a.id);
     const options = {
       headers: new HttpHeaders({
@@ -40,20 +31,21 @@ export class HttpArticleService extends ArticleService {
       body: ids,
     };
 
-    try {
-      await this.http.delete('/ws/articles-bulk', options).toPromise();
-      await this.refresh();
-    } catch (err) {
-      console.log('err: ', err);
-    }
+    this.http.delete<void>('/ws/articles-bulk', options).subscribe({
+      next: () => {
+        this.refresh();
+      },
+      error: (err) => console.error('err', err),
+    });
   }
 
-  async create(article: Article) {
-    try {
-      super.create(article);
-      await this.http.post('/ws/articles', article).toPromise();
-    } catch (err) {
-      console.log('err: ', err);
-    }
+  create(article: Article) {
+    super.create(article);
+    this.http.post('/ws/articles', article).subscribe({
+      next: () => {
+        this.refresh();
+      },
+      error: (err) => console.error('err', err),
+    });
   }
 }

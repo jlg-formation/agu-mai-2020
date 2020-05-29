@@ -15,7 +15,7 @@
     </div>
     <div class="body">
       <div
-        *ngFor="let article of articleService.articles"
+        *ngFor="let article of articleService.articles$ | async"
         class="row"
         (click)="select($event, article)"
       >
