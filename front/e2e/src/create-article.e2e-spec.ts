@@ -16,6 +16,8 @@ describe('workspace-project App', () => {
   });
 
   it('should create an article', async () => {
+    // if you need to start to devtool (F12)
+    await browser.sleep(0);
     await page.navigateTo();
     await page.clickOnCheckStock();
     await stockPage.clickOnCreateButton();

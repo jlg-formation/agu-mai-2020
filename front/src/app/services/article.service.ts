@@ -15,6 +15,7 @@ export class ArticleService {
   }
 
   create(article: Article) {
+    // debugger;
     console.log('article: ', article);
     this.articles$.value.push(article);
     this.articles$.next(this.articles$.value);
