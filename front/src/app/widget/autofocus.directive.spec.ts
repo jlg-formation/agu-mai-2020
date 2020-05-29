@@ -5,8 +5,7 @@ import { WidgetModule } from './widget.module';
 @Component({
   template: '<input type="text" appAutofocus>',
 })
-class TestComponent {
-}
+class TestComponent {}
 
 describe('AutofocusDirective', () => {
   let component: TestComponent;
@@ -25,13 +24,11 @@ describe('AutofocusDirective', () => {
     fixture.detectChanges();
   });
 
-
   it('should instantiate the directive', () => {
     expect(component).toBeTruthy();
   });
 
   it('should test that the element on focus is an input', () => {
-
     const compiled = fixture.nativeElement;
     const input = compiled.querySelector('input') as HTMLElement;
     expect(document.activeElement === input).toBeTrue();
