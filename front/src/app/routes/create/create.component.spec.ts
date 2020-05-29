@@ -6,6 +6,8 @@ import { WidgetModule } from 'src/app/widget/widget.module';
 import { Routes } from '@angular/router';
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
+import { ArticleService } from 'src/app/services/article.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-empty',
@@ -25,7 +27,7 @@ describe('CreateComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [CreateComponent, EmptyComponent],
-      imports: [RouterTestingModule.withRoutes(routes), WidgetModule],
+      imports: [RouterTestingModule.withRoutes(routes), WidgetModule, ReactiveFormsModule],
     }).compileComponents();
 
     location = TestBed.inject(Location);
@@ -56,4 +58,19 @@ describe('CreateComponent', () => {
     const article = articles.find(a => a.name === art.name);
     expect(article).toBeTruthy();
   }));
+
+  it('should not submit with invalid form', () => {
+    const art = {
+      price: 2123123123.99,
+      qty: 100,
+    };
+
+    const compiled = fixture.nativeElement;
+    compiled.querySelector('input[formcontrolname="name"]').value = '';
+    compiled.querySelector('input[formcontrolname="price"]').value = art.price;
+    compiled.querySelector('input[formcontrolname="qty"]').value = art.qty;
+    const isDisabled = compiled.querySelector('button').disabled;
+
+    expect(isDisabled).toBeTrue();
+  });
 });
