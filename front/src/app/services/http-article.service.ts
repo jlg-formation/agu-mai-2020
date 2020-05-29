@@ -11,7 +11,10 @@ export class HttpArticleService extends ArticleService {
   constructor(private http: HttpClient) {
     super();
     console.log('http article service', this.http);
-    this.refresh();
+    this.refresh().subscribe({
+      next: (articles) => this.articles$.next(articles),
+      error: (err) => console.error('err', err),
+    });
   }
 
   refresh() {
