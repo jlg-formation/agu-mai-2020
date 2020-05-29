@@ -42,13 +42,18 @@ describe('CreateComponent', () => {
   });
 
   it('should submit with success', fakeAsync(() => {
-    component.f.setValue({
+    const art = {
       name: 'Tournevis',
       price: 2.99,
       qty: 100,
-    });
+    };
+    component.f.setValue(art);
     component.submit();
     tick();
     expect(location.path()).toBe('/stock');
+    // test if articles is really created.
+    const articles = fixture.debugElement.injector.get(ArticleService).articles$.value;
+    const article = articles.find(a => a.name === art.name);
+    expect(article).toBeTruthy();
   }));
 });
