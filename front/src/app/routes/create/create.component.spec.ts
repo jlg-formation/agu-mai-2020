@@ -1,4 +1,10 @@
-import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
+import {
+  async,
+  ComponentFixture,
+  TestBed,
+  tick,
+  fakeAsync,
+} from '@angular/core/testing';
 
 import { CreateComponent } from './create.component';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -27,7 +33,11 @@ describe('CreateComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [CreateComponent, EmptyComponent],
-      imports: [RouterTestingModule.withRoutes(routes), WidgetModule, ReactiveFormsModule],
+      imports: [
+        RouterTestingModule.withRoutes(routes),
+        WidgetModule,
+        ReactiveFormsModule,
+      ],
     }).compileComponents();
 
     location = TestBed.inject(Location);
@@ -54,23 +64,25 @@ describe('CreateComponent', () => {
     tick();
     expect(location.path()).toBe('/stock');
     // test if articles is really created.
-    const articles = fixture.debugElement.injector.get(ArticleService).articles$.value;
-    const article = articles.find(a => a.name === art.name);
+    const articles = fixture.debugElement.injector.get(ArticleService).articles$
+      .value;
+    const article = articles.find((a) => a.name === art.name);
     expect(article).toBeTruthy();
   }));
 
-  it('should not submit with invalid form', () => {
+  it('should not submit with invalid form', fakeAsync(() => {
     const art = {
+      name: '',
       price: 2123123123.99,
       qty: 100,
     };
 
+    component.f.setValue(art);
+
     const compiled = fixture.nativeElement;
-    compiled.querySelector('input[formcontrolname="name"]').value = '';
-    compiled.querySelector('input[formcontrolname="price"]').value = art.price;
-    compiled.querySelector('input[formcontrolname="qty"]').value = art.qty;
+    fixture.detectChanges();
     const isDisabled = compiled.querySelector('button').disabled;
 
     expect(isDisabled).toBeTrue();
-  });
+  }));
 });
